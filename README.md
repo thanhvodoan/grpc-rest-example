@@ -19,7 +19,7 @@ go run server/main.go
 3. Start the REST Gateway (gRPC-Gateway)
 
 ```
-go run server/main.go
+go run gateway/main.go
 ```
 
 4. Test gRPC with grpcurl
