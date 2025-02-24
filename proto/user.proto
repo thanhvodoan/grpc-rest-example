@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package grpc.rest.example;
+
+import "google/api/annotations.proto";
+
+option go_package = "grpc-rest-example/proto;proto";
+
+message User {
+  string id = 1;
+  string name = 2;
+  optional int32 age = 3;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  int32 age = 2;
+}
+
+message CreateUserResponse {
+  string id = 1;
+  string name = 2; 
+}
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/v1/users/{id}"
+    };
+  }
+
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/v1/users"
+      body: "*"
+    };
+  }
+}
